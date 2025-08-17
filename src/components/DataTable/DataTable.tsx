@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import { ChevronUpIcon, ChevronDownIcon } from '@heroicons/react/24/outline';
 import { Loader2, Database } from 'lucide-react';
 import type { DataTableProps, Column } from './DataTable.types';
@@ -50,26 +50,41 @@ function DataTable<T extends Record<string, unknown>>({
 
   const currentSize = sizeClasses[size];
 
-  // Handle row selection
+  // Get row key - Fixed the typing issue
+  const getRowKey = (row: T): string => {
+    if (typeof rowKey === 'function') {
+      return String((rowKey as (row: T) => string | number)(row));
+    }
+    // Ensure rowKey is treated as a valid key of T
+    const key = rowKey as keyof T;
+    return String(row[key] ?? '');
+  };
+
+  // Handle row selection - Fixed the selectable comparison issue
   const handleRowSelect = (row: T, checked: boolean) => {
     let newSelectedRows: T[];
 
     if (selectable === 'single') {
       newSelectedRows = checked ? [row] : [];
-    } else {
+    } else if (selectable === true || selectable === 'multiple') {
       if (checked) {
         newSelectedRows = [...selectedRows, row];
       } else {
         newSelectedRows = selectedRows.filter(r => getRowKey(r) !== getRowKey(row));
       }
+    } else {
+      // selectable is false, do nothing
+      return;
     }
 
     setSelectedRows(newSelectedRows);
     onRowSelect?.(newSelectedRows);
   };
 
-  // Handle select all
+  // Handle select all - Only show when selectable is true or 'multiple'
   const handleSelectAll = (checked: boolean) => {
+    if (selectable === false || selectable === 'single') return;
+    
     const newSelectedRows = checked ? [...data] : [];
     setSelectedRows(newSelectedRows);
     onRowSelect?.(newSelectedRows);
@@ -86,14 +101,6 @@ function DataTable<T extends Record<string, unknown>>({
 
     setSortConfig({ key: column.key, direction });
     onSort?.(column.key, direction);
-  };
-
-  // Get row key
-  const getRowKey = (row: T): string => {
-    if (typeof rowKey === 'function') {
-      return String(rowKey(row));
-    }
-    return String(row[rowKey as keyof T]);
   };
 
   // Check if row is selected
@@ -147,6 +154,12 @@ function DataTable<T extends Record<string, unknown>>({
     return String(value ?? '');
   };
 
+  // Check if selection column should be shown
+  const showSelectionColumn = selectable !== false;
+  
+  // Check if select all checkbox should be shown
+  const showSelectAllCheckbox = selectable === true || selectable === 'multiple';
+
   // Loading state
   if (loading) {
     return (
@@ -199,9 +212,9 @@ function DataTable<T extends Record<string, unknown>>({
           <thead className={`bg-gray-50 dark:bg-gray-800 ${sticky ? 'sticky top-0 z-10' : ''}`}>
             <tr>
               {/* Selection column */}
-              {selectable && selectable !== false && (
+              {showSelectionColumn && (
                 <th className={`${currentSize.header} text-left`}>
-                  {selectable === 'multiple' && (
+                  {showSelectAllCheckbox && (
                     <input
                       type="checkbox"
                       className={`${currentSize.checkbox} rounded border-gray-300 dark:border-gray-600 text-blue-600 focus:ring-blue-500 focus:ring-offset-0`}
@@ -271,7 +284,7 @@ function DataTable<T extends Record<string, unknown>>({
                   onDoubleClick={() => onRowDoubleClick?.(record, index)}
                 >
                   {/* Selection column */}
-                  {selectable && selectable !== false && (
+                  {showSelectionColumn && (
                     <td className={currentSize.cell}>
                       <input
                         type="checkbox"

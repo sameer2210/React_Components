@@ -56,7 +56,7 @@ const preview: Preview = {
 
       return (
         <div className={`${darkMode === 'dark' ? 'dark' : ''}`}>
-          <div className="bg-white dark:bg-gray-900 min-h-screen p-4 transition-colors">
+          <div className="bg-white dark:bg-stone-900 min-h-screen p-4 transition-colors">
             <Story />
           </div>
         </div>

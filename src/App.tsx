@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { InputField } from "./components/InputField";
 import { DataTable } from "./components/DataTable";
 import { SunIcon, MoonIcon } from "@heroicons/react/24/outline";
@@ -12,6 +12,7 @@ interface User {
   role: string;
   status: string;
   joinDate: string;
+  [key: string]: unknown;
 }
 
 const App = () => {
@@ -91,7 +92,7 @@ const App = () => {
       sortable: true,
       render: (value: string) => (
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white text-sm font-semibold">
+          <div className="px-2 py-1.5 bg-gradient-to-br from-teal-500 to-black rounded-full flex items-center justify-center text-white text-sm font-semibold">
             {value.split(' ').map(n => n[0]).join('')}
           </div>
           <span className="font-medium">{value}</span>
@@ -163,12 +164,12 @@ const App = () => {
             
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+              className="p-2 rounded-lg bg-gray-50 dark:bg-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
             >
               {isDark ? (
-                <SunIcon className="w-5 h-5 text-yellow-500" />
+                <SunIcon className="w-5 h-5  text-yellow-400" />
               ) : (
-                <MoonIcon className="w-5 h-5 text-gray-600" />
+                <MoonIcon className="w-5 h-5 text-gray-100" />
               )}
             </button>
           </div>
@@ -190,7 +191,7 @@ const App = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Basic Input */}
-              <div className="space-y-4">
+              <div className="space-y-8">
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
                   Basic Examples
                 </h3>
@@ -233,7 +234,7 @@ const App = () => {
               </div>
 
               {/* States Demo */}
-              <div className="space-y-4">
+              <div className="space-y-8 ">
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
                   States & Variants
                 </h3>
@@ -288,7 +289,7 @@ const App = () => {
             </div>
 
             {/* Search Filter */}
-            <div className="mb-6">
+            <div className="mb-8">
               <InputField
                 label="Search Users"
                 placeholder="Search by name, email, or role..."
@@ -324,29 +325,6 @@ const App = () => {
             />
           </div>
         </section>
-
-        {/* Footer */}
-        <footer className="mt-12 text-center">
-          <div className="bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-700 p-6">
-            <p className="text-gray-600 dark:text-gray-400">
-              Built with ❤️ using React, TypeScript, and TailwindCSS
-            </p>
-            <div className="flex items-center justify-center gap-4 mt-4">
-              <span className="inline-flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400">
-                <span className="w-2 h-2 bg-green-500 rounded-full"></span>
-                Modern UI
-              </span>
-              <span className="inline-flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400">
-                <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
-                Fully Responsive
-              </span>
-              <span className="inline-flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400">
-                <span className="w-2 h-2 bg-purple-500 rounded-full"></span>
-                TypeScript
-              </span>
-            </div>
-          </div>
-        </footer>
       </div>
     </div>
   );

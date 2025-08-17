@@ -1,6 +1,7 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { InputFieldProps } from '../InputField';
 import InputField from './InputField';
-import { useState } from 'react';
+import { useState , type ReactElement} from 'react';
 
 const meta: Meta<typeof InputField> = {
   title: 'Components/InputField',
@@ -34,7 +35,9 @@ export default meta;
 type Story = StoryObj<typeof InputField>;
 
 // Interactive wrapper for stories that need state
-const InteractiveWrapper = ({ children, ...args }: any) => {
+const InteractiveWrapper = ({ children, ...args }: {
+  children: (props: InputFieldProps) => ReactElement;
+} & Partial<InputFieldProps>) => {
   const [value, setValue] = useState(args.value || '');
   return children({
     ...args,
@@ -46,7 +49,7 @@ const InteractiveWrapper = ({ children, ...args }: any) => {
 export const Default: Story = {
   render: (args) => (
     <InteractiveWrapper {...args}>
-      {(props: any) => <InputField {...props} />}
+      {(props: InputFieldProps) => <InputField {...props} />}
     </InteractiveWrapper>
   ),
   args: {

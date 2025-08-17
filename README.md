@@ -35,7 +35,7 @@ A modern React component library featuring InputField and DataTable components b
 - **Vite** - Fast build tool
 - **Heroicons & Lucide React** - Beautiful icons
 
-## 📦 Installation
+## Installation
 
 ```bash
 # Clone the repository
@@ -52,7 +52,7 @@ npm run dev
 npm run storybook
 ```
 
-## 🎯 Usage
+## Usage
 
 ### InputField Example
 
@@ -253,67 +253,6 @@ You can deploy the Storybook to platforms like:
 
 ## 📁 Project Structure
 
-```
-react_components/
-├── src/
-│   ├── components/
-│   │   ├── InputField/
-│   │   │   ├── InputField.tsx
-│   │   │   ├── InputField.types.ts
-│   │   │   ├── InputField.stories.tsx
-│   │   │   └── index.ts
-│   │   └── DataTable/
-│   │       ├── DataTable.tsx
-│   │       ├── DataTable.types.ts
-│   │       ├── DataTable.stories.tsx
-│   │       └── index.ts
-│   ├── App.tsx
-│   ├── main.tsx
-│   └── index.css
-├── .storybook/
-├── package.json
-└── README.md
-```
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add/update tests and stories
-5. Submit a pull request
-
-## 📄 License
-
-MIT License - feel free to use in your projects!
-
-## 🔧 Development Notes
-
-- **TypeScript**: Strict mode enabled for better type safety
-- **ESLint**: Code quality and consistency
-- **Prettier**: Code formatting (recommended)
-- **Git Hooks**: Pre-commit linting (optional)
-
-## 🚨 Browser Support
-
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
-
-## 📋 Roadmap
-
-- [ ] Add more input types (date, select, textarea)
-- [ ] DataTable virtual scrolling for large datasets
-- [ ] Form validation integration
-- [ ] Animation presets
-- [ ] Theme customization system
-- [ ] Additional component variants
-
----
-
-**Happy coding!** 🎉
-
 react_components/
 │
 ├── node_modules/
@@ -352,43 +291,41 @@ react_components/
 ├── vite.config.ts
 └── README.md
 
-<!-- json file -->
+## 🤝 Contributing
 
-{
-"name": "vite-project",
-"private": true,
-"version": "0.0.0",
-"type": "module",
-"scripts": {
-"dev": "vite",
-"build": "tsc -b && vite build",
-"lint": "eslint .",
-"preview": "vite preview",
-"storybook": "storybook dev -p 6006",
-"build-storybook": "storybook build"
-},
-"dependencies": {
-"@tailwindcss/vite": "^4.1.12",
-"lucide-react": "^0.539.0",
-"react": "^19.1.1",
-"react-dom": "^19.1.1",
-"tailwindcss": "^4.1.12"
-},
-"devDependencies": {
-"@eslint/js": "^9.33.0",
-"@storybook/addon-docs": "^9.1.2",
-"@storybook/react-vite": "^9.1.2",
-"@types/react": "^19.1.10",
-"@types/react-dom": "^19.1.7",
-"@vitejs/plugin-react-swc": "^4.0.0",
-"eslint": "^9.33.0",
-"eslint-plugin-react-hooks": "^5.2.0",
-"eslint-plugin-react-refresh": "^0.4.20",
-"eslint-plugin-storybook": "^9.1.2",
-"globals": "^16.3.0",
-"storybook": "^9.1.2",
-"typescript": "~5.8.3",
-"typescript-eslint": "^8.39.1",
-"vite": "^7.1.2"
-}
-}
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add/update tests and stories
+5. Submit a pull request
+
+## 📄 License
+
+MIT License - feel free to use in your projects!
+
+## 🔧 Development Notes
+
+- **TypeScript**: Strict mode enabled for better type safety
+- **ESLint**: Code quality and consistency
+- **Prettier**: Code formatting (recommended)
+- **Git Hooks**: Pre-commit linting (optional)
+
+## 🚨 Browser Support
+
+- Chrome (latest)
+- Firefox (latest)
+- Safari (latest)
+- Edge (latest)
+
+## 📋 Roadmap
+
+- [ ] Add more input types (date, select, textarea)
+- [ ] DataTable virtual scrolling for large datasets
+- [ ] Form validation integration
+- [ ] Animation presets
+- [ ] Theme customization system
+- [ ] Additional component variants
+
+---
+
+**Happy coding!**

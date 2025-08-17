@@ -1,3 +1,5 @@
+import React from 'react';
+
 export type Column<T> = {
   key: string;
   title: string;
@@ -5,6 +7,7 @@ export type Column<T> = {
   sortable?: boolean;
   width?: string | number;
   align?: 'left' | 'center' | 'right';
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   render?: (value: any, record: T, index: number) => React.ReactNode;
   fixed?: 'left' | 'right';
 };
@@ -22,7 +25,7 @@ export interface DataTableProps<T> {
     total: number;
     onChange: (page: number, pageSize: number) => void;
   };
-  rowKey?: keyof T | string;
+  rowKey?: keyof T | ((row: T) => string | number);
   size?: 'sm' | 'md' | 'lg';
   bordered?: boolean;
   striped?: boolean;

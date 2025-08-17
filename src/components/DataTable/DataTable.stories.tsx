@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import DataTable from './DataTable';
 import { useState } from 'react';
 
@@ -155,14 +155,14 @@ export const SingleSelection: Story = {
 
 export const Enhanced: Story = {
   render: () => {
-    const [selectedRows, setSelectedRows] = useState<typeof sampleUsers>([]);
+    
     
     return (
       <DataTable
         data={sampleUsers}
         columns={enhancedColumns}
         selectable="multiple"
-        onRowSelect={setSelectedRows}
+        onRowSelect={() => {}}
         hoverable
         striped
         onRowClick={(record) => console.log('Row clicked:', record)}
@@ -225,7 +225,7 @@ export const CustomEmpty: Story = {
     loading: false,
     emptyText: (
       <div className="text-center">
-        <div className="text-6xl mb-4">🔍</div>
+        <div className="text-6xl mb-4"></div>
         <p className="text-gray-500 font-medium">No users found</p>
         <p className="text-gray-400 text-sm mt-1">Try adjusting your search criteria</p>
       </div>
@@ -253,7 +253,7 @@ export const WithPagination: Story = {
       current: currentPage,
       pageSize,
       total: largeDataset.length,
-      onChange: (page: number, size: number) => {
+      onChange: (page: number,) => {
         setCurrentPage(page);
       },
     };
