@@ -1,5 +1,3 @@
-import React from "react";
-
 export interface InputFieldProps {
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -9,10 +7,24 @@ export interface InputFieldProps {
   errorMessage?: string;
   disabled?: boolean;
   invalid?: boolean;
-  variant?: "outlined" | "filled" | "ghost";
-  size?: "sm" | "md" | "lg";
-  type?: "text" | "password" | "email";
-  loading?: boolean;
+  variant?: 'filled' | 'outlined' | 'ghost';
+  size?: 'sm' | 'md' | 'lg';
+  type?: string;
   clearable?: boolean;
+  togglePassword?: boolean;
+  loading?: boolean;
+  className?: string;
+  id?: string;
+  name?: string;
+  autoComplete?: string;
+  autoFocus?: boolean;
+  readOnly?: boolean;
   required?: boolean;
+  maxLength?: number;
+  minLength?: number;
+  pattern?: string;
+  onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
+  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
+  onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  onClear?: () => void;
 }
