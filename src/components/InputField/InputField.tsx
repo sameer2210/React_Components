@@ -24,32 +24,32 @@ const InputField: React.FC<InputFieldProps> = ({
 
   const inputId = `input-${Math.random().toString(36).substr(2, 9)}`;
   
-  // Simple size mapping
+  // Modern size mapping with better spacing
   const sizeStyles = {
-    sm: 'h-8 px-3 text-sm',
-    md: 'h-10 px-3 text-base',
-    lg: 'h-12 px-4 text-lg'
+    sm: 'h-9 px-3 text-sm',
+    md: 'h-11 px-4 text-base',
+    lg: 'h-13 px-5 text-lg'
   };
 
-  // Clean variant styles with dark mode support
+  // Clean variant styles with proper dark mode support
   const getVariantStyles = () => {
-    const baseStyles = 'w-full rounded-lg border transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20';
+    const baseStyles = 'w-full rounded-xl border transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:ring-offset-0';
     
     if (disabled) {
-      return `${baseStyles} bg-gray-100 dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-500 dark:text-gray-400 cursor-not-allowed`;
+      return `${baseStyles} bg-gray-100 dark:bg-gray-700 border-gray-200 dark:border-gray-600 text-gray-400 dark:text-gray-500 cursor-not-allowed opacity-60`;
     }
     
     if (invalid) {
-      return `${baseStyles} bg-red-50 dark:bg-red-900/20 border-red-300 dark:border-red-600 text-red-900 dark:text-red-300 focus:border-red-500 dark:focus:border-red-400 focus:ring-red-500/20`;
+      return `${baseStyles} bg-red-50 dark:bg-red-950/50 border-red-300 dark:border-red-500 text-red-900 dark:text-red-100 focus:border-red-500 dark:focus:border-red-400 focus:ring-red-500/20 shadow-sm`;
     }
 
     switch (variant) {
       case 'filled':
-        return `${baseStyles} bg-gray-100 dark:bg-gray-800 border-gray-100 dark:border-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 focus:bg-white dark:focus:bg-gray-900 focus:border-blue-500 text-gray-900 dark:text-gray-100`;
+        return `${baseStyles} bg-gray-50 dark:bg-gray-700 border-gray-200 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-600 focus:bg-white dark:focus:bg-gray-800 focus:border-blue-500 dark:focus:border-blue-400 text-gray-900 dark:text-gray-100 shadow-sm`;
       case 'ghost':
-        return `${baseStyles} bg-transparent dark:bg-transparent border-transparent hover:bg-gray-50 dark:hover:bg-gray-800/50 focus:border-blue-500 focus:bg-white dark:focus:bg-gray-900 text-gray-900 dark:text-gray-100`;
+        return `${baseStyles} bg-transparent border-transparent hover:bg-gray-50 dark:hover:bg-gray-800/70 focus:border-gray-300 dark:focus:border-gray-600 focus:bg-white dark:focus:bg-gray-800 text-gray-900 dark:text-gray-100`;
       default: // outlined
-        return `${baseStyles} bg-white dark:bg-gray-900 border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500 focus:border-blue-500 text-gray-900 dark:text-gray-100 ${isFocused ? 'border-blue-500' : ''}`;
+        return `${baseStyles} bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500 focus:border-blue-500 dark:focus:border-blue-400 text-gray-900 dark:text-gray-100 shadow-sm hover:shadow-md focus:shadow-lg ${isFocused ? 'border-blue-500 dark:border-blue-400 shadow-lg' : ''}`;
     }
   };
 
@@ -71,8 +71,8 @@ const InputField: React.FC<InputFieldProps> = ({
       {label && (
         <label 
           htmlFor={inputId}
-          className={`block mb-1.5 text-sm font-medium ${
-            invalid ? 'text-red-700 dark:text-red-400' : 'text-gray-700 dark:text-gray-300'
+          className={`block mb-2 text-sm font-semibold transition-colors ${
+            invalid ? 'text-red-700 dark:text-red-400' : 'text-gray-800 dark:text-gray-200'
           } ${required ? "after:content-['*'] after:text-red-500 after:ml-1" : ''}`}
         >
           {label}
@@ -92,8 +92,8 @@ const InputField: React.FC<InputFieldProps> = ({
           disabled={disabled || loading}
           required={required}
           className={`${getVariantStyles()} ${sizeStyles[size]} ${
-            (clearable && value) || type === 'password' || loading ? 'pr-10' : ''
-          } placeholder-gray-400 dark:placeholder-gray-500`}
+            (clearable && value) || type === 'password' || loading ? 'pr-12' : ''
+          } placeholder-gray-500 dark:placeholder-gray-400 font-medium`}
           aria-invalid={invalid}
           aria-describedby={
             (invalid && errorMessage) ? `${inputId}-error` : 
@@ -103,19 +103,19 @@ const InputField: React.FC<InputFieldProps> = ({
 
         {/* Right Icons */}
         {((clearable && value) || type === 'password' || loading) && (
-          <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1">
+          <div className="absolute right-4 top-1/2 -translate-y-1/2 flex items-center gap-2">
             {loading && (
-              <Loader2 className="h-4 w-4 text-gray-400 dark:text-gray-500 animate-spin" />
+              <Loader2 className="h-4 w-4 text-blue-500 dark:text-blue-400 animate-spin" />
             )}
             
             {clearable && value && !loading && (
               <button
                 type="button"
                 onClick={handleClear}
-                className="text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+                className="text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md"
                 aria-label="Clear input"
               >
-                <X className="h-4 w-4" />
+                <X className="h-3.5 w-3.5" />
               </button>
             )}
             
@@ -123,7 +123,7 @@ const InputField: React.FC<InputFieldProps> = ({
               <button
                 type="button"
                 onClick={togglePassword}
-                className="text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+                className="text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md"
                 aria-label={showPassword ? 'Hide password' : 'Show password'}
               >
                 {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
@@ -135,11 +135,12 @@ const InputField: React.FC<InputFieldProps> = ({
 
       {/* Helper/Error Text */}
       {invalid && errorMessage ? (
-        <p id={`${inputId}-error`} className="mt-1.5 text-sm text-red-600 dark:text-red-400">
+        <p id={`${inputId}-error`} className="mt-2 text-sm text-red-600 dark:text-red-400 font-medium flex items-center gap-1">
+          <span className="inline-block w-1 h-1 rounded-full"></span>
           {errorMessage}
         </p>
       ) : helperText ? (
-        <p id={`${inputId}-helper`} className="mt-1.5 text-sm text-gray-500 dark:text-gray-400">
+        <p id={`${inputId}-helper`} className="mt-2 text-sm text-gray-600 dark:text-gray-400">
           {helperText}
         </p>
       ) : null}
