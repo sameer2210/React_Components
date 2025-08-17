@@ -30,29 +30,38 @@ This project contains reusable React components.
 
 react_components/
 │
+|---.storybook
 ├── node_modules/
-├── public/ # static assets (favicon, images, etc.)
 │
 ├── src/
-│ ├── components/ # all reusable UI components
-│ │ └── InputField/
-│ │ ├── InputField.tsx
-│ │ ├── InputField.types.ts
-│ │ ├── index.ts # re-export for easy imports
+│ ├── components/
+│ │ ├── InputField/
+│ │ │ ├── InputField.tsx
+│ │ │ ├── InputField.types.ts
+│ │ │ ├── InputField.stories.tsx
+│ │ │ └── index.ts
+│ │ │
+│ │ ├── DataTable/
+│ │ │ ├── DataTable.tsx
+│ │ │ ├── DataTable.types.ts
+│ │ │ ├── DataTable.stories.tsx
+│ │ │ └── index.ts
 │ │
-│ ├── pages/ # app pages
-│ │ ├── Demo.tsx # InputField demo playground
-│ │ ├── About.tsx # example About page
-│ │ └── Contact.tsx # example Contact page
+│ ├── pages/
+│ │ └── Demo.tsx
 │ │
-│ ├── App.tsx # main app entry (imports pages)
-│ ├── main.tsx # Vite entry point
-│ ├── index.css # global styles (Tailwind)
-│ └── vite-env.d.ts # Vite TS types
+│ ├── App.tsx
+│ ├── main.tsx
+│ ├── index.css
+│ └── vite-env.d.ts
+│
+├── .storybook/
+│ ├── main.ts
+│ └── preview.ts
 │
 ├── .gitignore
 ├── eslint.config.js
-├── index.html # Vite root HTML
+├── index.html
 ├── package.json
 ├── tsconfig.json
 ├── tsconfig.app.json

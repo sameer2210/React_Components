@@ -1,5 +1,3 @@
-
-// src/components/InputField/InputField.types.ts
 import React from "react";
 
 export interface InputFieldProps {
@@ -11,9 +9,9 @@ export interface InputFieldProps {
   errorMessage?: string;
   disabled?: boolean;
   invalid?: boolean;
-  variant?: 'outlined' | 'filled' | 'ghost';
-  size?: 'sm' | 'md' | 'lg';
-  type?: 'text' | 'password' | 'email';
+  variant?: "outlined" | "filled" | "ghost";
+  size?: "sm" | "md" | "lg";
+  type?: "text" | "password" | "email";
   loading?: boolean;
   clearable?: boolean;
   required?: boolean;
