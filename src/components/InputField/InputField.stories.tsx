@@ -275,7 +275,7 @@ export const FormExample: Story = {
         
         <InputField
           label="Email"
-          placeholder="john.doe@example.com"
+          placeholder="sam@example.com"
           type="email"
           value={formData.email}
           onChange={(e) => updateField('email', e.target.value)}
@@ -322,7 +322,7 @@ export const DarkMode: Story = {
     const [value, setValue] = useState('');
     
     return (
-      <div className="dark bg-gray-900 p-6 rounded-lg">
+      <div className="dark bg-gray-900 p-6 rounded">
         <InputField
           label="Dark Mode Input"
           placeholder="Type in dark mode"

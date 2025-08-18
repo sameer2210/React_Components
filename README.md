@@ -2,6 +2,24 @@
 
 > A modern, production-ready React component library featuring **InputField** and **DataTable** components built with TypeScript, TailwindCSS, and industry best practices.
 
+## Live Demo & Storybook
+
+[![Demo](https://img.shields.io/badge/Demo-Live-blue)](https://react-components-tan-two.vercel.app)
+
+[![Storybook](https://img.shields.io/badge/Storybook-Live-orange)](https://68a2dfe4cb8afbff5930bb67-zswgcohqbu.chromatic.com/)
+
+---
+
+## 📸 Screenshots
+
+### InputField Component
+
+![InputField Screenshot](docs/screenshots/inputfield.png)
+
+### DataTable Component
+
+![DataTable Screenshot](docs/screenshots/datatable.png)
+
 ## Key Features
 
 ### **InputField Component**
@@ -77,6 +95,15 @@ npm run build-storybook # Build Storybook
 # Code Quality
 npm run lint            # Run ESLint
 npm run preview         # Preview production build
+
+
+# Run Chromatic for Storybook
+npm run chromatic       #Deploy Storybook
+
+📌 This will give you a public Storybook link like:
+👉 https://68a2dfe4cb8afbff5930bb67-zswgcohqbu.chromatic.com
+
+
 ```
 
 ## Usage Examples
@@ -499,9 +526,7 @@ react_components/
 
 Built with ❤️ by [ SAM ](https://github.com/sameer2210)
 
-(portfolio-coral-two-16.vercel.app)
-
-[Demo](react-components-tan-two.vercel.app) • [Storybook](https://your-storybook-link.vercel.app) •
+[![Portfolio](https://img.shields.io/badge/Portfolio-Live-brightgreen)](https://portfolio-coral-two-16.vercel.app)
 
 </div>
 
