@@ -251,7 +251,7 @@ export const FormExample: Story = {
     };
 
     return (
-      <form onSubmit={handleSubmit} className="space-y-4 w-80 p-6 bg-white dark:bg-gray-900 rounded-lg border">
+      <form onSubmit={handleSubmit} className="space-y-4 w-80 p-6 bg-gray-50 dark:bg-gray-900 rounded-lg border">
         <h3 className="text-lg font-semibold mb-4">Registration Form</h3>
         
         <div className="grid grid-cols-2 gap-4">
@@ -308,7 +308,7 @@ export const FormExample: Story = {
         
         <button
           type="submit"
-          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-colors"
+          className="w-full bg-teal-800-600 hover:bg-teal-900-700 text-white font-medium py-2 px-4 rounded-lg transition-colors"
         >
           Register
         </button>

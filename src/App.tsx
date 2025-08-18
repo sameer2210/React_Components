@@ -164,12 +164,12 @@ const App = () => {
             
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-lg bg-gray-50 dark:bg-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+              className="p-2 rounded-lg bg-gray-600 dark:bg-gray-500 hover:bg-gray-800 dark:hover:bg-gray-400 transition-colors"
             >
               {isDark ? (
-                <SunIcon className="w-5 h-5  text-yellow-400" />
+                <SunIcon className="w-5 h-5  text-yellow-300" />
               ) : (
-                <MoonIcon className="w-5 h-5 text-gray-100" />
+                <MoonIcon className="w-5 h-5 text-gray-50" />
               )}
             </button>
           </div>

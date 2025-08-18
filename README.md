@@ -1,46 +1,57 @@
 # React Components Library
 
-A modern React component library featuring InputField and DataTable components built with React, TypeScript, and TailwindCSS.
+> A modern, production-ready React component library featuring **InputField** and **DataTable** components built with TypeScript, TailwindCSS, and industry best practices.
 
-## Features
+## Key Features
 
-### InputField Component
+### **InputField Component**
 
-- **Multiple Variants**: Outlined, Filled, Ghost
-- **Flexible Sizes**: Small, Medium, Large
-- **Advanced States**: Loading, Error, Disabled
-- **Enhanced UX**: Floating labels, clear button, password toggle
-- **Full Validation**: Error messages, helper text, required fields
-- **Accessibility**: ARIA labels and proper semantics
-- **Dark Mode**: Full dark theme support
+- ** Multiple Variants**: Outlined, Filled, Ghost styles
+- ** Flexible Sizing**: Small, Medium, Large configurations
+- ** Advanced States**: Loading, Error, Disabled with smooth animations
+- ** Enhanced UX**: Floating labels, clear button, password toggle
+- ** Full Validation**: Error messages, helper text, required fields
+- ** Accessibility**: ARIA labels, keyboard navigation, screen reader support
+- ** Dark Mode**: Complete dark theme integration
 
-### DataTable Component
+### **DataTable Component**
 
-- **Interactive Sorting**: Click headers to sort data
-- **Row Selection**: Single or multiple selection modes
-- **Modern UI**: Hover effects, striped rows, clean borders
-- **Responsive Design**: Horizontal scroll on mobile
-- **Loading States**: Skeleton loading and empty states
-- **Custom Rendering**: Support for custom cell renderers
-- **Pagination**: Built-in pagination support
-- **Sticky Headers**: Keep headers visible while scrolling
-- **Dark Mode**: Seamless dark theme integration
+- ** Interactive Sorting**: Click headers to sort ascending/descending
+- ** Row Selection**: Single, multiple, or no selection modes
+- ** Modern UI**: Hover effects, striped rows, clean borders
+- ** Responsive Design**: Horizontal scroll, mobile-optimized
+- ** Loading States**: Skeleton loading and empty state handling
+- ** Custom Rendering**: Support for custom cell renderers and actions
+- ** Pagination**: Built-in pagination with page size controls
+- ** Sticky Headers**: Keep headers visible during scrolling
+- ** Dark Mode**: Seamless dark theme support
 
-## Tech Stack
+[![React](https://img.shields.io/badge/React-18-blue?logo=react)](https://reactjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.8-blue?logo=typescript)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-blue?logo=tailwindcss)](https://tailwindcss.com/)
+[![Storybook](https://img.shields.io/badge/Storybook-7-ff4785?logo=storybook)](https://storybook.js.org/)
+[![Vite](https://img.shields.io/badge/Vite-5.4-646CFF?logo=vite)](https://vitejs.dev/)
 
-- **React 18** - Modern React with hooks
-- **TypeScript** - Type safety and better DX
-- **TailwindCSS** - Utility-first styling
-- **Storybook 7** - Component documentation
-- **Vite** - Fast build tool
-- **Heroicons & Lucide React** - Beautiful icons
+## 🛠️ Tech Stack
 
-## Installation
+| Technology       | Version | Purpose                                           |
+| ---------------- | ------- | ------------------------------------------------- |
+| **React**        | 18.2+   | Modern React with hooks and functional components |
+| **TypeScript**   | 5.8+    | Type safety and enhanced developer experience     |
+| **TailwindCSS**  | 3.4+    | Utility-first styling framework                   |
+| **Storybook**    | 7+      | Component documentation and testing               |
+| **Vite**         | 5.4+    | Fast build tool and development server            |
+| **Heroicons**    | 2.2+    | Beautiful SVG icons                               |
+| **Lucide React** | 0.539+  | Additional icon library                           |
+
+## Quick Start
+
+### Installation
 
 ```bash
 # Clone the repository
-git clone <repository-url>
-cd react_components
+git clone https://github.com/yourusername/react-components-library.git
+cd react-components-library
 
 # Install dependencies
 npm install
@@ -48,70 +59,172 @@ npm install
 # Start development server
 npm run dev
 
-# Start Storybook
+# Launch Storybook (Component Documentation)
 npm run storybook
 ```
 
-## Usage
+### Development Commands
 
-### InputField Example
+```bash
+# Development
+npm run dev              # Start Vite dev server
+npm run storybook       # Launch Storybook
+
+# Production
+npm run build           # Build for production
+npm run build-storybook # Build Storybook
+
+# Code Quality
+npm run lint            # Run ESLint
+npm run preview         # Preview production build
+```
+
+## Usage Examples
+
+### InputField Component
 
 ```tsx
 import { InputField } from "./components/InputField";
+import { useState } from "react";
 
-function MyForm() {
-  const [value, setValue] = useState("");
+function LoginForm() {
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
 
   return (
-    <InputField
-      label="Email"
-      placeholder="Enter your email"
-      value={value}
-      onChange={(e) => setValue(e.target.value)}
-      type="email"
-      variant="outlined"
-      size="md"
-      clearable
-      helperText="We'll never share your email"
-      required
-    />
+    <form className="space-y-4">
+      <InputField
+        label="Email Address"
+        placeholder="Enter your email"
+        type="email"
+        value={formData.email}
+        onChange={(e) =>
+          setFormData((prev) => ({
+            ...prev,
+            email: e.target.value,
+          }))
+        }
+        variant="outlined"
+        size="md"
+        clearable
+        required
+        helperText="We'll never share your email"
+      />
+
+      <InputField
+        label="Password"
+        placeholder="Enter your password"
+        type="password"
+        value={formData.password}
+        onChange={(e) =>
+          setFormData((prev) => ({
+            ...prev,
+            password: e.target.value,
+          }))
+        }
+        variant="outlined"
+        size="md"
+        togglePassword
+        required
+        helperText="Must be at least 8 characters"
+      />
+    </form>
   );
 }
 ```
 
-### DataTable Example
+### DataTable Component
 
 ```tsx
 import { DataTable } from "./components/DataTable";
+import { useState } from "react";
 
 interface User {
   id: number;
   name: string;
   email: string;
   role: string;
+  status: "Active" | "Inactive";
 }
 
-function UserTable() {
-  const data: User[] = [
-    { id: 1, name: "John Doe", email: "john@example.com", role: "Developer" },
-    { id: 2, name: "Jane Smith", email: "jane@example.com", role: "Designer" },
+function UserManagement() {
+  const [selectedUsers, setSelectedUsers] = useState<User[]>([]);
+
+  const users: User[] = [
+    {
+      id: 1,
+      name: "John Doe",
+      email: "john@example.com",
+      role: "Developer",
+      status: "Active",
+    },
+    // ... more users
   ];
 
   const columns = [
-    { key: "id", title: "ID", dataIndex: "id", sortable: true },
-    { key: "name", title: "Name", dataIndex: "name", sortable: true },
-    { key: "email", title: "Email", dataIndex: "email", sortable: true },
-    { key: "role", title: "Role", dataIndex: "role" },
+    {
+      key: "id",
+      title: "ID",
+      dataIndex: "id" as keyof User,
+      sortable: true,
+      width: 80,
+    },
+    {
+      key: "name",
+      title: "Full Name",
+      dataIndex: "name" as keyof User,
+      sortable: true,
+      render: (value: string) => (
+        <div className="flex items-center gap-3">
+          <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm font-semibold">
+            {value
+              .split(" ")
+              .map((n) => n[0])
+              .join("")}
+          </div>
+          <span className="font-medium">{value}</span>
+        </div>
+      ),
+    },
+    {
+      key: "status",
+      title: "Status",
+      dataIndex: "status" as keyof User,
+      render: (value: string) => (
+        <span
+          className={`px-3 py-1 rounded-full text-xs font-medium ${
+            value === "Active"
+              ? "bg-green-100 text-green-800"
+              : "bg-gray-100 text-gray-800"
+          }`}
+        >
+          {value}
+        </span>
+      ),
+    },
   ];
 
   return (
     <DataTable
-      data={data}
+      data={users}
       columns={columns}
       selectable="multiple"
-      onRowSelect={(rows) => console.log("Selected:", rows)}
+      onRowSelect={setSelectedUsers}
       hoverable
       striped
+      pagination={{
+        current: 1,
+        pageSize: 10,
+        total: users.length,
+        onChange: (page, pageSize) => {
+          console.log("Page changed:", page, pageSize);
+        },
+      }}
+      onRowClick={(user) => {
+        console.log("User clicked:", user.name);
+      }}
     />
   );
 }
@@ -121,103 +234,103 @@ function UserTable() {
 
 ### InputField Props
 
-| Prop             | Type                                | Default      | Description             |
-| ---------------- | ----------------------------------- | ------------ | ----------------------- |
-| `value`          | `string`                            | `''`         | Input value             |
-| `onChange`       | `function`                          | -            | Change handler          |
-| `label`          | `string`                            | -            | Input label             |
-| `placeholder`    | `string`                            | -            | Placeholder text        |
-| `helperText`     | `string`                            | -            | Helper text below input |
-| `errorMessage`   | `string`                            | -            | Error message           |
-| `disabled`       | `boolean`                           | `false`      | Disable input           |
-| `invalid`        | `boolean`                           | `false`      | Show error state        |
-| `variant`        | `'outlined' \| 'filled' \| 'ghost'` | `'outlined'` | Input style variant     |
-| `size`           | `'sm' \| 'md' \| 'lg'`              | `'md'`       | Input size              |
-| `type`           | `string`                            | `'text'`     | Input type              |
-| `clearable`      | `boolean`                           | `false`      | Show clear button       |
-| `togglePassword` | `boolean`                           | `false`      | Show password toggle    |
-| `loading`        | `boolean`                           | `false`      | Show loading state      |
-| `required`       | `boolean`                           | `false`      | Mark as required        |
+| Property         | Type                                | Default      | Description                     |
+| ---------------- | ----------------------------------- | ------------ | ------------------------------- |
+| `value`          | `string`                            | `''`         | Input value                     |
+| `onChange`       | `(e: ChangeEvent) => void`          | -            | Change event handler            |
+| `label`          | `string`                            | -            | Floating label text             |
+| `placeholder`    | `string`                            | -            | Placeholder text                |
+| `variant`        | `'outlined' \| 'filled' \| 'ghost'` | `'outlined'` | Visual style variant            |
+| `size`           | `'sm' \| 'md' \| 'lg'`              | `'md'`       | Component size                  |
+| `type`           | `string`                            | `'text'`     | HTML input type                 |
+| `disabled`       | `boolean`                           | `false`      | Disable the input               |
+| `invalid`        | `boolean`                           | `false`      | Show error state                |
+| `loading`        | `boolean`                           | `false`      | Show loading spinner            |
+| `clearable`      | `boolean`                           | `false`      | Show clear button               |
+| `togglePassword` | `boolean`                           | `false`      | Show password visibility toggle |
+| `required`       | `boolean`                           | `false`      | Mark field as required          |
+| `helperText`     | `string`                            | -            | Helper text below input         |
+| `errorMessage`   | `string`                            | -            | Error message text              |
 
 ### DataTable Props
 
-| Prop          | Type                                | Default | Description              |
-| ------------- | ----------------------------------- | ------- | ------------------------ |
-| `data`        | `T[]`                               | -       | Table data array         |
-| `columns`     | `Column<T>[]`                       | -       | Column definitions       |
-| `loading`     | `boolean`                           | `false` | Show loading state       |
-| `selectable`  | `boolean \| 'single' \| 'multiple'` | `false` | Row selection mode       |
-| `onRowSelect` | `function`                          | -       | Selection change handler |
-| `size`        | `'sm' \| 'md' \| 'lg'`              | `'md'`  | Table size               |
-| `bordered`    | `boolean`                           | `true`  | Show borders             |
-| `striped`     | `boolean`                           | `true`  | Zebra striping           |
-| `hoverable`   | `boolean`                           | `true`  | Row hover effects        |
-| `sticky`      | `boolean`                           | `false` | Sticky header            |
-| `maxHeight`   | `string \| number`                  | -       | Max table height         |
-| `pagination`  | `object`                            | -       | Pagination config        |
+| Property      | Type                                 | Default | Description                |
+| ------------- | ------------------------------------ | ------- | -------------------------- |
+| `data`        | `T[]`                                | -       | Array of data objects      |
+| `columns`     | `Column<T>[]`                        | -       | Column definitions         |
+| `loading`     | `boolean`                            | `false` | Show loading state         |
+| `selectable`  | `boolean \| 'single' \| 'multiple'`  | `false` | Row selection mode         |
+| `onRowSelect` | `(rows: T[]) => void`                | -       | Selection change callback  |
+| `size`        | `'sm' \| 'md' \| 'lg'`               | `'md'`  | Table size                 |
+| `striped`     | `boolean`                            | `true`  | Alternate row colors       |
+| `hoverable`   | `boolean`                            | `true`  | Row hover effects          |
+| `bordered`    | `boolean`                            | `true`  | Show table borders         |
+| `sticky`      | `boolean`                            | `false` | Sticky table header        |
+| `maxHeight`   | `string \| number`                   | -       | Maximum table height       |
+| `pagination`  | `PaginationConfig`                   | -       | Pagination configuration   |
+| `onRowClick`  | `(record: T, index: number) => void` | -       | Row click handler          |
+| `emptyText`   | `ReactNode`                          | -       | Custom empty state content |
 
-## 🎨 Design System
+## Design System
 
 ### Color Palette
 
-- **Primary**: Blue (500-600)
-- **Success**: Green (500-600)
-- **Warning**: Yellow/Amber (500-600)
-- **Error**: Red (500-600)
-- **Neutral**: Gray (50-900)
+- **Primary**: Blue (#3B82F6 - #2563EB)
+- **Success**: Green (#10B981 - #059669)
+- **Warning**: Amber (#F59E0B - #D97706)
+- **Error**: Red (#EF4444 - #DC2626)
+- **Neutral**: Gray (#F9FAFB - #111827)
 
-### Spacing Scale
+### Typography Scale
 
-- **Small**: 0.5rem (8px)
-- **Medium**: 1rem (16px)
-- **Large**: 1.5rem (24px)
-- **XLarge**: 2rem (32px)
+- **Headings**: 600-700 font weight
+- **Body**: 400-500 font weight
+- **Small**: 0.875rem (14px)
+- **Base**: 1rem (16px)
+- **Large**: 1.125rem (18px)
 
-### Typography
+### Spacing System
 
-- **Headings**: Font weight 600-700
-- **Body**: Font weight 400-500
-- **Small Text**: 0.875rem (14px)
-- **Base Text**: 1rem (16px)
+- **xs**: 0.5rem (8px)
+- **sm**: 0.75rem (12px)
+- **md**: 1rem (16px)
+- **lg**: 1.5rem (24px)
+- **xl**: 2rem (32px)
 
-## 🌙 Dark Mode
+## 🌙 Dark Mode Support
 
-Both components support dark mode out of the box. Simply add the `dark` class to your root element:
-
-```html
-<html class="dark">
-  <!-- Your app -->
-</html>
-```
-
-Or toggle programmatically:
+Both components feature complete dark mode support. Toggle dark mode programmatically:
 
 ```tsx
+// Toggle dark mode
 const toggleDarkMode = () => {
   document.documentElement.classList.toggle("dark");
 };
+
+// Or set explicitly
+document.documentElement.classList.add("dark"); // Enable
+document.documentElement.classList.remove("dark"); // Disable
 ```
 
-## 📱 Responsive Design
-
-Components are fully responsive:
+## Responsive Design
 
 - **Mobile First**: Optimized for mobile devices
-- **Breakpoints**: sm (640px), md (768px), lg (1024px)
-- **Flexible**: Adapts to container width
-- **Touch Friendly**: Proper touch targets
+- **Breakpoints**: sm (640px), md (768px), lg (1024px), xl (1280px)
+- **Touch Friendly**: Proper touch targets (44px minimum)
+- **Adaptive**: Components adjust to container width
 
-## ♿ Accessibility
+## Accessibility Features
 
-- **Semantic HTML**: Proper HTML elements and structure
-- **ARIA Labels**: Screen reader support
-- **Keyboard Navigation**: Full keyboard support
-- **Focus Management**: Clear focus indicators
-- **Color Contrast**: WCAG AA compliant colors
+- ✅ **Semantic HTML**: Proper HTML5 elements and structure
+- ✅ **ARIA Labels**: Full screen reader support
+- ✅ **Keyboard Navigation**: Tab, Enter, Space key support
+- ✅ **Focus Management**: Clear focus indicators and trapping
+- ✅ **Color Contrast**: WCAG AA compliant (4.5:1 ratio)
+- ✅ **Screen Reader**: Tested with NVDA and VoiceOver
 
 ## 📖 Storybook Documentation
 
-Access comprehensive component documentation:
+Access comprehensive component documentation and interactive playground:
 
 ```bash
 npm run storybook
@@ -226,32 +339,110 @@ npm run storybook
 Visit `http://localhost:6006` to explore:
 
 - Interactive component playground
-- All component variants and states
-- Usage examples
-- Props documentation
-- Dark mode toggle
+- All variants, states, and configurations
+- Usage examples and code snippets
+- Props documentation with controls
+- Dark mode toggle for testing
+- Responsive viewport testing
 
-## Deployment
+**Deployment Options:**
 
-### Build for Production
-
-```bash
-npm run build
-```
-
-### Deploy Storybook
-
-```bash
-npm run build-storybook
-```
-
-You can deploy the Storybook to platforms like:
-
-- **Chromatic**: `npx chromatic --project-token=<token>`
-- **Vercel**: Connect your repository
-- **Netlify**: Drag and drop the `storybook-static` folder
+- **Vercel**: Connect GitHub repository for auto-deployment
+- **Netlify**: Drag & drop `storybook-static` folder
+- **GitHub Pages**: Use GitHub Actions workflow
+- **Chromatic**: `npx chromatic --project-token=<your-token>`
 
 ## 📁 Project Structure
+
+```
+react-components-library/
+├── 📁 .storybook/          # Storybook configuration
+│   ├── main.ts
+│   └── preview.tsx
+├── 📁 src/
+│   ├── 📁 components/
+│   │   ├── 📁 InputField/
+│   │   │   ├── InputField.tsx
+│   │   │   ├── InputField.types.ts
+│   │   │   ├── InputField.stories.tsx
+│   │   │   └── index.ts
+│   │   └── 📁 DataTable/
+│   │       ├── DataTable.tsx
+│   │       ├── DataTable.types.ts
+│   │       ├── DataTable.stories.tsx
+│   │       └── index.ts
+│   ├── App.tsx
+│   ├── main.tsx
+│   └── index.css
+├── 📄 package.json
+├── 📄 tsconfig.json
+├── 📄 tailwind.config.js
+├── 📄 vite.config.ts
+└── 📄 README.md
+```
+
+### Testing Strategy
+
+- **Unit Tests**: Component logic testing
+- **Integration Tests**: Component interaction testing
+- **Visual Tests**: Storybook visual regression testing
+- **Accessibility Tests**: A11y compliance validation
+
+## 🗺️ Roadmap
+
+### Phase 1 - Enhanced Inputs ⏳
+
+- [ ] DatePicker component
+- [ ] Select/Dropdown component
+- [ ] Textarea component
+- [ ] File upload component
+
+### Phase 2 - Advanced Features 🔮
+
+- [ ] Virtual scrolling for large datasets
+- [ ] Advanced filtering and search
+- [ ] Drag & drop functionality
+- [ ] Export functionality (CSV, PDF)
+
+### Phase 3 - Developer Experience 🚀
+
+- [ ] Theme customization system
+- [ ] Component generator CLI
+- [ ] Figma design tokens integration
+- [ ] Performance optimization
+
+## 🤝 Contributing
+
+We welcome contributions! Please follow these steps:
+
+1. **Fork** the repository
+2. **Create** a feature branch: `git checkout -b feature/amazing-feature`
+3. **Commit** your changes: `git commit -m 'Add amazing feature'`
+4. **Push** to branch: `git push origin feature/amazing-feature`
+5. **Submit** a Pull Request
+
+### Development Setup
+
+```bash
+git clone https://github.com/yourusername/react-components-library.git
+cd react-components-library
+npm install
+npm run dev
+```
+
+## 📄 License
+
+This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
+
+## 🙋‍♂️ Support
+
+- 📧 **Email**: your.email@example.com
+- 🐛 **Issues**: [GitHub Issues](https://github.com/yourusername/react-components-library/issues)
+- 💬 **Discussions**: [GitHub Discussions](https://github.com/yourusername/react-components-library/discussions)
+
+---
+
+# folder Stracture
 
 react_components/
 │
@@ -291,32 +482,6 @@ react_components/
 ├── vite.config.ts
 └── README.md
 
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add/update tests and stories
-5. Submit a pull request
-
-## 📄 License
-
-MIT License - feel free to use in your projects!
-
-## 🔧 Development Notes
-
-- **TypeScript**: Strict mode enabled for better type safety
-- **ESLint**: Code quality and consistency
-- **Prettier**: Code formatting (recommended)
-- **Git Hooks**: Pre-commit linting (optional)
-
-## 🚨 Browser Support
-
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
-
 ## 📋 Roadmap
 
 - [ ] Add more input types (date, select, textarea)
@@ -327,5 +492,17 @@ MIT License - feel free to use in your projects!
 - [ ] Additional component variants
 
 ---
+
+<div align="center">
+
+**Star this repo if you find it helpful! **
+
+Built with ❤️ by [ SAM ](https://github.com/sameer2210)
+
+(portfolio-coral-two-16.vercel.app)
+
+[Demo](react-components-tan-two.vercel.app) • [Storybook](https://your-storybook-link.vercel.app) •
+
+</div>
 
 **Happy coding!**

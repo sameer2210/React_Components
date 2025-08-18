@@ -98,8 +98,8 @@ const InputField: React.FC<InputFieldProps> = ({
 
   // Build input classes
   const inputClasses = [
-    'w-full outline-none transition-all duration-200 ease-in-out',
-    'placeholder:text-gray-400 dark:placeholder:text-gray-500',
+    'w-full outline-none transition-all duration-200 ease-in-out bg-transparent',
+    'placeholder:text-gray-600 dark:placeholder:text-gray-300',
     'text-gray-900 dark:text-gray-100',
     'disabled:cursor-not-allowed disabled:opacity-60',
     currentSize.input
@@ -121,11 +121,11 @@ const InputField: React.FC<InputFieldProps> = ({
 
   // Build label classes
   const labelClasses = [
-    'absolute left-0 pointer-events-none transition-all duration-200 ease-in-out',
+    'absolute left-0 pointer-events-none transition-all duration-200 ease-in-out z-10',
     'text-gray-500 dark:text-gray-400',
     currentSize.label,
     showLabel
-      ? 'top-0 -translate-y-1/2 bg-white dark:bg-gray-900 px-2 mx-2 text-xs font-medium scale-90'
+      ? 'top-0 -translate-y-1/2 bg-slate-900 px-2 mx-2 text-xs font-medium scale-90'
       : `top-1/2 -translate-y-1/2 ${currentSize.text}`
   ].join(' ');
 
@@ -177,7 +177,7 @@ const InputField: React.FC<InputFieldProps> = ({
           onFocus={handleFocus}
           onBlur={handleBlur}
           onKeyDown={onKeyDown}
-          placeholder={focused ? placeholder : ''}
+          placeholder={showLabel ? placeholder : ''}
           disabled={disabled}
           readOnly={readOnly}
           required={required}
